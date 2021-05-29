@@ -36,4 +36,11 @@ public class AdminController {
 
         return new ResponseEntity<>(userService.getEmployeesByCriteria(employeeFilterRequest), HttpStatus.OK);
     }
+
+    @PostMapping ("/deleteEmployee")
+    public ResponseEntity<Page<User>> deleteEmployee(@RequestBody EmployeeRequest employeeRequest)
+    {
+        userService.deleteUser(employeeRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

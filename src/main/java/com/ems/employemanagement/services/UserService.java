@@ -45,9 +45,9 @@ public class UserService {
     {
         System.out.println(employeeRequest.toString());
         User user=new User();
-        user.setEnabled(employeeRequest.isEnabled());
+        user.setEnabled(true);
         user.setRole(employeeRequest.getRole().name());
-        user.setUsername(employeeRequest.getUserName());
+        user.setUsername(employeeRequest.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(employeeRequest.getPassword()));
         user.setName(employeeRequest.getName());
         user.setAddress(employeeRequest.getAddress());
@@ -67,6 +67,11 @@ public class UserService {
         Sort sort=Sort.by(employeeFilterRequest.getSortDirection(),employeeFilterRequest.getSortBy());
         Pageable pageable= PageRequest.of(employeeFilterRequest.getPageNumber(),employeeFilterRequest.getPageSize(),sort);
         return userRepository.findAll(UserSpecs.getUserByIdUserNameNameAddress(employeeFilterRequest),pageable);
+    }
+
+    public void deleteUser(EmployeeRequest employeeRequest)
+    {
+        this.userRepository.deleteById(employeeRequest.getId());
     }
 
 }
