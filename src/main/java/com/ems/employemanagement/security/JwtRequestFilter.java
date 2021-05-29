@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 jwt=authorizationHeader.substring(7);
                 username=jwtUtilService.extractUsername(jwt);
                 role=jwtUtilService.extractRole(jwt);
-                System.out.println(role.toArray()[0]);
+                //System.out.println(role.toArray()[0]);
             }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

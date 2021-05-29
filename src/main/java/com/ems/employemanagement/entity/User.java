@@ -1,13 +1,14 @@
 package com.ems.employemanagement.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
 @Table(name="Users")
 public class User {
     @Id
-    @Column(name="user_id")
+    @Column(name="id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     @Column(name="NAME")
@@ -16,11 +17,32 @@ public class User {
     private boolean isEnabled;
     @Column(name="role")
     private String role;
-
-
-
+    @Column(nullable = true)
+    private String address;
+    @Column(nullable = true)
+    private Date joiningDate;
     @Column(name="password")
     private String password;
+    @Column(name="username" ,unique = true)
+    private String username;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(Date joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+
 
     public String getPassword() {
         return password;
@@ -62,8 +84,7 @@ public class User {
         this.username = username;
     }
 
-    @Column(name="username" ,unique = true)
-    private String username;
+
 
     public String getRole() {
         return role;
