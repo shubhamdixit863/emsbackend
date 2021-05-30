@@ -22,10 +22,21 @@ public class AdminController {
     private TimesheetService timesheetService;
 
     @PostMapping("/createEmployee")
-    public User createUser(@RequestBody EmployeeRequest employeeRequest)
+    public ResponseEntity<User> createUser(@RequestBody EmployeeRequest employeeRequest)
     {
+        System.out.println(employeeRequest.toString());
+        try{
+            return  new ResponseEntity<>(userService.createUser(employeeRequest),HttpStatus.OK);
 
-        return userService.createUser(employeeRequest);
+
+        }
+
+        catch (Exception e)
+        {
+            return  new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+
+        }
+
     }
 
     @PostMapping ("/employeeList")
@@ -58,6 +69,17 @@ public class AdminController {
     @PostMapping("/updateEmployeeAdmin")
     public ResponseEntity<User> updateEmployeeAdmin(@RequestBody EmployeeRequest employeeRequest)
     {
-        return new ResponseEntity<>(userService.updateEmployeeAdmin(employeeRequest),HttpStatus.OK);
+        try{
+            System.out.println(employeeRequest.toString());
+
+            return new ResponseEntity<>(userService.updateEmployeeAdmin(employeeRequest),HttpStatus.OK);
+
+        }
+
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+
+        }
     }
 }
