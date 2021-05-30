@@ -89,7 +89,8 @@ public class EmployeeRequest {
     public String toString() {
         return "EmployeeRequest{" +
                 "name='" + name + '\'' +
-                ", userName='" + username + '\'' +
+                ", id=" + id +
+                ", username='" + username + '\'' +
                 ", isEnabled=" + isEnabled +
                 ", role=" + role +
                 ", Address='" + Address + '\'' +
