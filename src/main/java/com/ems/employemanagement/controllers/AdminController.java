@@ -24,6 +24,7 @@ public class AdminController {
     @PostMapping("/createEmployee")
     public User createUser(@RequestBody EmployeeRequest employeeRequest)
     {
+
         return userService.createUser(employeeRequest);
     }
 
@@ -52,5 +53,11 @@ public class AdminController {
     public ResponseEntity<Page<Timesheet>> getTimesheet(@RequestBody PageInfo pageInfo)
     {
         return new ResponseEntity<>(timesheetService.getTimesheets(pageInfo),HttpStatus.OK);
+    }
+
+    @PostMapping("/updateEmployeeAdmin")
+    public ResponseEntity<User> updateEmployeeAdmin(@RequestBody EmployeeRequest employeeRequest)
+    {
+        return new ResponseEntity<>(userService.updateEmployeeAdmin(employeeRequest),HttpStatus.OK);
     }
 }

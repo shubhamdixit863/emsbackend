@@ -92,4 +92,21 @@ public class UserService {
         this.userRepository.deleteById(employeeRequest.getId());
     }
 
+    public User updateEmployeeAdmin(EmployeeRequest employeeRequest)
+    {
+        User user=userRepository.findById(employeeRequest.getId()).get();
+        user.setEnabled(true);
+
+        user.setUsername(employeeRequest.getUsername());
+        if(employeeRequest.getPassword()!=null)
+        {
+            user.setPassword(bCryptPasswordEncoder.encode(employeeRequest.getPassword()));
+
+        }
+        user.setName(employeeRequest.getName());
+        user.setAddress(employeeRequest.getAddress());
+        user.setJoiningDate(Date.valueOf(employeeRequest.getJoiningDate()));
+        return userRepository.save(user);
+    }
+
 }
