@@ -2,7 +2,7 @@ package com.ems.employemanagement.models;
 
 import org.springframework.data.domain.Sort;
 
-public class EmployeePage {
+public class PageInfo {
     private int pageNumber=0;
     private int pageSize=10;
     private Sort.Direction sortDirection=Sort.Direction.ASC;

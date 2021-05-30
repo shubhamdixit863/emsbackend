@@ -2,7 +2,7 @@ package com.ems.employemanagement.services;
 
 import com.ems.employemanagement.entity.User;
 import com.ems.employemanagement.models.EmployeeFilterRequest;
-import com.ems.employemanagement.models.EmployeePage;
+import com.ems.employemanagement.models.PageInfo;
 import com.ems.employemanagement.models.EmployeeRequest;
 import com.ems.employemanagement.models.UserCreationRequest;
 import com.ems.employemanagement.repositories.UserRepository;
@@ -55,10 +55,28 @@ public class UserService {
         return userRepository.save(user);
 
     }
-    public Page<User> getEmployees(EmployeePage employeePage)
+
+    public User updateUser(EmployeeRequest employeeRequest,String username)
     {
-        Sort sort=Sort.by(employeePage.getSortDirection(),employeePage.getSortBy());
-        Pageable pageable= PageRequest.of(employeePage.getPageNumber(),employeePage.getPageSize(),sort);
+        User user=userRepository.findByUsername(username);
+        user.setEnabled(true);
+
+        user.setUsername(employeeRequest.getUsername());
+        if(employeeRequest.getPassword()!=null)
+        {
+            user.setPassword(bCryptPasswordEncoder.encode(employeeRequest.getPassword()));
+
+        }
+        user.setName(employeeRequest.getName());
+        user.setAddress(employeeRequest.getAddress());
+        user.setJoiningDate(Date.valueOf(employeeRequest.getJoiningDate()));
+        return userRepository.save(user);
+    }
+
+    public Page<User> getEmployees(PageInfo pageInfo)
+    {
+        Sort sort=Sort.by(pageInfo.getSortDirection(), pageInfo.getSortBy());
+        Pageable pageable= PageRequest.of(pageInfo.getPageNumber(), pageInfo.getPageSize(),sort);
         return userRepository.findAll(pageable);
     }
 

@@ -26,6 +26,10 @@ public class User {
     @Column(name="username" ,unique = true)
     private String username;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Timesheet> timesheets;
+
     public String getAddress() {
         return address;
     }
